@@ -1,0 +1,13 @@
+# Vim
+*~
+*.swp
+*.swo
+
+# LaTeX
+*.aux
+*.log
+*.nav
+*.out
+*.snm
+*.vrb
+*.toc
