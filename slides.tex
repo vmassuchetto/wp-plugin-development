@@ -111,13 +111,28 @@
   \end{center}
 \end{frame}
 
+\subsection{Arquivos}
+
+\begin{frame}{Arquivos}
+\begin{itemize}
+  \pause \item Nomear o diretório
+  \pause \item Ser coerente com nomes de arquivos
+  \pause \item Incluir somente arquivos necessários e sob demanda no código
+  \pause \item Permitir que o diretório do plugin mude usando funções como:
+  \begin{itemize}
+    \pause \item \texttt{plugins\_url}
+    \pause \item \texttt{plugin\_dir\_url}
+    \pause \item \texttt{plugin\_dir\_path}
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
 \subsection{Padrões de Código}
 
 \begin{frame}{Padrões de Código}
 \begin{itemize}
   \pause \item Ater-se aos padrões recomendados para código e documentação
   \pause \item Nomear as estruturas e funções com um identificador único
-  \pause \item Ser coerente com nomes de arquivos
   \pause \item Clareza é melhor do que praticidade
 \end{itemize}
 \end{frame}
@@ -178,16 +193,6 @@
   \lstinputlisting{./code/standards-sql-right.php}
 \end{frame}
 
-\begin{frame}{wpdb}
-\begin{itemize}
-  \pause \item \texttt{query}
-  \pause \item \texttt{prepare}
-  \pause \item \texttt{insert}
-  \pause \item \texttt{update}
-  \pause \item \texttt{get\_var}
-\end{itemize}
-\end{frame}
-
 \section{Desenvolvimento}
 
 \begin{frame}\end{frame}
@@ -230,7 +235,7 @@
 \end{itemize}
 \end{frame}
 
-\subsection{Interfaces com o WordPress}
+\subsection{Interfaces}
 
 \begin{frame}{Ativação}
 \begin{itemize}
@@ -255,6 +260,7 @@
   \pause \item Não deve deixar nenhum dado residual no WordPress
   \pause \item Remove opções do usuário
   \pause \item Remove tabelas
+  \pause \item Avisa o usuário sobre a remoção de dados
 \end{itemize}
 \end{frame}
 
@@ -275,6 +281,21 @@
   \pause \lstinputlisting{./code/plugin-init-oo-pl.php}
 \end{frame}
 
+\begin{frame}{Banco de dados}
+Usar sempre a \texttt{wpdb}:
+\begin{itemize}
+  \pause \item \texttt{query}
+  \pause \item \texttt{prepare}
+  \pause \item \texttt{insert}
+  \pause \item \texttt{update}
+  \pause \item \texttt{get\_var}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Tratando dados para consultas}
+  \pause \lstinputlisting{./code/standards-sql-prepare.php}
+\end{frame}
+
 \begin{frame}{Uso de Ações e Filtros}
 \begin{itemize}
   \pause \item Base da construção de plugins no WordPress
@@ -291,10 +312,136 @@
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Implementação de Ações e Filtros}
+\begin{frame}{Implementação de Ações}
   \lstinputlisting{./code/plugin-ext-action.php}
   \pause \lstinputlisting{./code/plugin-ext-action-use.php}
 \end{frame}
+
+\begin{frame}{Implementação de Filtros}
+  \lstinputlisting{./code/plugin-ext-filter.php}
+  \pause \lstinputlisting{./code/plugin-ext-filter-use.php}
+\end{frame}
+
+\begin{frame}{Implementação de Ações e Filtros}
+  \lstinputlisting{./code/plugin-ext-form.php}
+\end{frame}
+
+\subsection{Scripts e Estilos}
+
+\begin{frame}\end{frame}
+
+\begin{frame}{Enfileiradores de scripts}
+\pause Funções:
+\begin{itemize}
+  \pause \item \texttt{wp\_enqueue\_script}
+  \pause \item \texttt{wp\_enqueue\_style}
+  \pause \item \texttt{wp\_localize\_script}
+\end{itemize}
+\pause Hooks:
+\begin{itemize}
+  \pause \item \texttt{wp\_enqueue\_scripts}
+  \pause \item \texttt{admin\_enqueue\_scripts}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Incluindo scripts}
+  \pause \lstinputlisting{./code/scripts-enqueue.php}
+\end{frame}
+
+\begin{frame}{Incluindo scripts e variáveis}
+  \pause \lstinputlisting{./code/scripts-enqueue-localized.php}
+\end{frame}
+
+\begin{frame}{Incluindo scripts e variáveis}
+  \pause \lstinputlisting{./code/scripts-enqueue-localized-result.txt}
+\end{frame}
+
+\subsection{Ferramentas}
+
+\begin{frame}\end{frame}
+
+\begin{frame}{Não precisa reinventar a roda}
+  \begin{center}
+    \includegraphics[height=0.8\textheight]{./img/rewrite.jpg}
+  \end{center}
+\end{frame}
+
+\begin{frame}{Internacionalização}
+\begin{itemize}
+  \pause \item Usar funções \texttt{\_\_()} e \texttt{\_e()}
+  \pause \item Carregar o arquivo MO de idioma
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Tratamento de erros}
+\begin{itemize}
+  \pause \item \texttt{WP\_Error}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Morrer elegantemente}
+\begin{itemize}
+  \pause \item \texttt{wp\_die}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Checar compatibilidade com versão}
+  \pause if (!function\_exists) ..
+\end{frame}
+
+\begin{frame}{Formatação}
+\begin{itemize}
+  \pause \item \texttt{is\_email}
+  \pause \item \texttt{remove\_accents}
+  \pause \item \texttt{sanitize\_title}
+  \pause \item \texttt{sanitize\_email}
+  \pause \item \texttt{seems\_utf8}
+  \pause \item \texttt{zeroise}
+  \pause \item \texttt{wptexturize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Transients API}
+\begin{itemize}
+  \pause \item \texttt{set\_transient}
+  \pause \item \texttt{get\_transient}
+  \pause \item \texttt{delete\_transient}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{HTTP API}
+\begin{itemize}
+  \pause \item \texttt{wp\_remote\_get}
+  \pause \item \texttt{wp\_remote\_retrieve\_body}
+  \pause \item \texttt{wp\_remote\_retrieve\_headers}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Object Cache}
+\begin{itemize}
+  \pause \item \texttt{wp\_cache\_add}
+  \pause \item \texttt{wp\_cache\_set}
+  \pause \item \texttt{wp\_cache\_get}
+  \pause \item \texttt{wp\_cache\_delete}
+  \pause \item \texttt{wp\_cache\_flush}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Classes Úteis}
+\begin{itemize}
+  \pause \item \texttt{SimplePie}
+  \pause \item \texttt{PHPMailer}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Funções Úteis}
+\begin{itemize}
+  \pause \item \texttt{wp\_mail}
+  \pause \item \texttt{fetch\_feed}
+  \pause \item \texttt{human\_time\_diff}
+\end{itemize}
+\end{frame}
+
 
 
 

@@ -1,0 +1,9 @@
+<script .. jquery.js .. ></script>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+var params = {"key1":"val1","key2":"val2"};
+/* ]]> */
+</script>
+
+<script .. my_script.js .. ></script>
