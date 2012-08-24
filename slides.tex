@@ -1,0 +1,342 @@
+\documentclass{beamer}
+
+\usepackage[brazilian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{fontenc}
+\usepackage{listings}
+\usepackage{verbatim}
+\usepackage{pxfonts}
+\usepackage{graphicx}
+\usetheme{Warsaw}
+
+\title{Plugins no WordPress}
+\subtitle{Fazendo o Negócio Direito}
+\author{Vinicius Massuchetto}
+\institute{WordCamp São Paulo 2012}
+\date{Agosto de 2012}
+
+\lstset{%
+  breakatwhitespace,
+  columns=fullflexible,
+  keepspaces,
+  breaklines,
+  tabsize=2,
+  showstringspaces=false,
+  extendedchars=true,
+  basicstyle=\footnotesize\ttfamily,
+  frame=leftline}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\section{Introdução}
+
+\subsection{Download}
+
+\begin{frame}{Download}
+  \begin{center}
+    Esta apresentação está disponível em: \\
+    \url{http://vinicius.soylocoporti.org.br/?p=2191}
+  \end{center}
+\end{frame}
+
+\subsection{Sobre a Palestra}
+
+\begin{frame}{Sobre a Palestra}
+\begin{itemize}
+  \item Motivação Desta Apresentação
+\end{itemize}
+\end{frame}
+
+\subsection{Motivação}
+
+\begin{frame}{Não encontrar o que procura}
+  \begin{center}
+    \includegraphics[height=0.8\textheight]{./img/plugins.jpg}
+  \end{center}
+\end{frame}
+
+\begin{frame}{Motivos para se criar um plugin}
+\begin{itemize}
+  \pause \item Funcionalidade inexistente
+  \pause \item Diferente implementação de uma funcionalidade existente
+  \pause \item Códigos de tema portáveis
+  \pause \item Implementações modulares para clientes
+  \pause \item Forks de plugins existentes
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Dificuldades em se escrever um plugin}
+\begin{itemize}
+  \pause \item PHP X WordPress
+  \pause \item Cultura de leitura de documentação e inspeção de código
+  \pause \item Barreira de idioma
+  \pause \item Entrega de produtos deficitários
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Facilidades}
+\begin{itemize}
+  \pause \item Código legível
+  \pause \item Padronização de estruturas
+  \pause \item Melhor aprendizado e manutenção do código
+  \pause \item Extensibilidade
+  \pause \item Distributividade na comunidade do software livre
+\end{itemize}
+\end{frame}
+
+\subsection{Avançando a Ideia}
+
+\begin{frame}{Pensando Em Um Plugin}
+\begin{itemize}
+  \pause \item Definição de escopo e pesquisa de funcionalidades
+  \pause \item Se parecer redundante, perguntar e descrever a
+    ideia em listas e fóruns
+  \pause \item Escolha de nome único e relevante
+  \pause \item Avaliação do uso de outras tecnologias e frameworks
+\end{itemize}
+\end{frame}
+
+\section{Padrões}
+
+\begin{frame}\end{frame}
+
+\subsection{Primeiro Padrão}
+
+\begin{frame}{Primeiro Padrão}
+  \begin{center}
+    \includegraphics[height=0.8\textheight]{./img/hack-core.jpg}
+  \end{center}
+\end{frame}
+
+\subsection{Padrões de Código}
+
+\begin{frame}{Padrões de Código}
+\begin{itemize}
+  \pause \item Ater-se aos padrões recomendados para código e documentação
+  \pause \item Nomear as estruturas e funções com um identificador único
+  \pause \item Ser coerente com nomes de arquivos
+  \pause \item Clareza é melhor do que praticidade
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Tag PHP}
+  \pause Errado
+  \lstinputlisting{./code/standards-php-tag-wrong.php}
+\end{frame}
+
+\begin{frame}{Tag PHP}
+  Certo
+  \lstinputlisting{./code/standards-php-tag-right.php}
+\end{frame}
+
+\begin{frame}{Chaves}
+  Errado
+  \lstinputlisting{./code/standards-brace-wrong.php}
+\end{frame}
+
+\begin{frame}{Chaves}
+  Certo
+  \lstinputlisting{./code/standards-brace-right.php}
+\end{frame}
+
+\begin{frame}{Funções}
+  Errado
+  \lstinputlisting{./code/standards-spaces-wrong.php}
+\end{frame}
+
+\begin{frame}{Funções}
+  Certo
+  \lstinputlisting{./code/standards-spaces-right.php}
+\end{frame}
+
+\begin{frame}{Vetores}
+  \lstinputlisting{./code/standards-arrays.php}
+\end{frame}
+
+\subsection{Padrões de SQL}
+
+\begin{frame}{Padrões de SQL}
+\begin{itemize}
+  \pause \item Evitar escrever consultas
+  \pause \item Validar os tipos de dados antes de utilizá-los
+  \pause \item Selecionar só o que for necessário
+  \pause \item Utilizar a \texttt{wpdb}
+  \pause \item Se precisar criar tabelas no banco, use \texttt{\$wpdb->prefix}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Exemplo de Consulta}
+  Errado
+  \lstinputlisting{./code/standards-sql-wrong.php}
+\end{frame}
+
+\begin{frame}{Exemplo de Consulta}
+  Certo
+  \lstinputlisting{./code/standards-sql-right.php}
+\end{frame}
+
+\begin{frame}{wpdb}
+\begin{itemize}
+  \pause \item \texttt{query}
+  \pause \item \texttt{prepare}
+  \pause \item \texttt{insert}
+  \pause \item \texttt{update}
+  \pause \item \texttt{get\_var}
+\end{itemize}
+\end{frame}
+
+\section{Desenvolvimento}
+
+\begin{frame}\end{frame}
+
+\begin{frame}{Debug}
+  \begin{center}
+    \includegraphics[height=0.8\textheight]{./img/debug.jpg}
+  \end{center}
+\end{frame}
+
+\begin{frame}{Constantes de debug no \texttt{wp-config.php}}
+\begin{itemize}
+  \item \pause \texttt{WP\_DEBUG}
+  \item \pause \texttt{WP\_DEBUG\_LOG}
+  \item \pause \texttt{WP\_DEBUG\_DISPLAY}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Cabeçalho}
+  \pause Todo plugin começa pelo começo..
+  \pause \lstinputlisting{./code/plugin-header.txt}
+\end{frame}
+
+\subsection{Estrutura}
+
+\begin{frame}{Estrutura Procedural}
+  \pause \lstinputlisting{./code/estrutura-procedural.php}
+\end{frame}
+
+\begin{frame}{Estrutura Orientada a Objetos}
+  \pause \lstinputlisting{./code/estrutura-oo.php}
+\end{frame}
+
+\begin{frame}{Vantagens da Orientação a Objetos em Plugins}
+\begin{itemize}
+  \pause \item Organiza o código, suas funções e métodos
+  \pause \item Melhora a extensibilidade
+  \pause \item Reduz o impacto no escopo global do PHP
+  \pause \item Ajuda a não introduzir variáveis globais
+\end{itemize}
+\end{frame}
+
+\subsection{Interfaces com o WordPress}
+
+\begin{frame}{Ativação}
+\begin{itemize}
+  \pause \item \texttt{register\_activation\_hook}
+  \pause \item Criação de opções padrão
+  \pause \item Criação de tabelas
+  \pause \item Exibição de avisos para o usuário configurar o plugin
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Desativação}
+\begin{itemize}
+  \pause \item \texttt{register\_deactivation\_hook}
+  \pause \item Em geral não deve causar nenhuma perda de dados
+  \pause \item Desabilitar plugins dependentes
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Desinstalação}
+\begin{itemize}
+  \pause \item \texttt{register\_uninstall\_hook}
+  \pause \item Não deve deixar nenhum dado residual no WordPress
+  \pause \item Remove opções do usuário
+  \pause \item Remove tabelas
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Inicialização}
+\begin{itemize}
+  \pause \item \texttt{*\_init()}
+  \pause \item Geralmente através de um procedimento inicializador
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Inicialização}
+  \lstinputlisting{./code/plugin-init-procedure-inline.php}
+  \pause \lstinputlisting{./code/plugin-init-procedure-pl.php}
+\end{frame}
+
+\begin{frame}{Inicialização}
+  \lstinputlisting{./code/plugin-init-oo-inline.php}
+  \pause \lstinputlisting{./code/plugin-init-oo-pl.php}
+\end{frame}
+
+\begin{frame}{Uso de Ações e Filtros}
+\begin{itemize}
+  \pause \item Base da construção de plugins no WordPress
+  \pause \item Certificar-se de agendar os eventos e
+    tratar os dados adequadamente
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Implementação de Ações e Filtros}
+\begin{itemize}
+  \pause \item Oferecer extensibilidade aos dados gerados
+  \pause \item Possibilitar a inserção de novos procedimentos à medida
+    que eventos relevantes acontecem
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Implementação de Ações e Filtros}
+  \lstinputlisting{./code/plugin-ext-action.php}
+  \pause \lstinputlisting{./code/plugin-ext-action-use.php}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Considerações Finais}
+
+\begin{frame}{Referências}
+\begin{itemize}
+  \item Codex: Writing a Plugins \\
+    \url{http://codex.wordpress.org/Writing_a_Plugin}
+  \item WordPress Answers
+    \url{http://wordpress.stackexchange.com/questions/715/objective-best-practices-for-plugin-development}
+\end{itemize}
+\end{frame}
+
+\end{document}

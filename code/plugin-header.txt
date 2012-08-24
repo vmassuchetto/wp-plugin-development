@@ -1,0 +1,8 @@
+/*
+ * Plugin Name: Nome do Plugin
+ * Version: 0.01
+ * Description: Texto longo
+ * Author: Nome do Autor
+ * Contributors: Logins no WordPress.org
+ * Plugin URI: http://uma-url.com
+ */
