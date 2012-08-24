@@ -46,16 +46,26 @@
 
 \begin{frame}{Sobre a Palestra}
 \begin{itemize}
-  \item Motivação Desta Apresentação
+  \pause \item Motivação, dificuldades e vantagens dos métodos
+  \pause \item Padrões de desenvolvimento no WordPress
+  \pause \item Estrutura de código
+  \pause \item Interfaces com o WordPress
+  \pause \item Ferramentas úteis já presentes no WordPress
 \end{itemize}
 \end{frame}
 
 \subsection{Motivação}
 
-\begin{frame}{Não encontrar o que procura}
-  \begin{center}
-    \includegraphics[height=0.8\textheight]{./img/plugins.jpg}
-  \end{center}
+\begin{frame}{Motivação}
+\begin{center}
+  \includegraphics[height=0.8\textheight]{./img/plugins.jpg}
+\end{center}
+\end{frame}
+
+\begin{frame}{Motivação}
+\begin{center}
+  \includegraphics[height=0.8\textheight]{./img/plugins-install.jpg}
+\end{center}
 \end{frame}
 
 \begin{frame}{Motivos para se criar um plugin}
@@ -64,7 +74,15 @@
   \pause \item Diferente implementação de uma funcionalidade existente
   \pause \item Códigos de tema portáveis
   \pause \item Implementações modulares para clientes
-  \pause \item Forks de plugins existentes
+  \pause \item Forks para ajustes e extensões de plugins existentes
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Perguntas}
+\begin{itemize}
+  \pause \item Demonstração, apoio ou funcionalidade crítica?
+  \pause \item Comunidade, visibilidade ou emprego?
+  \pause \item Tempo para suporte?
 \end{itemize}
 \end{frame}
 
@@ -77,11 +95,12 @@
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Facilidades}
+\begin{frame}{Vantagens de se seguir algumas boas práticas}
 \begin{itemize}
   \pause \item Código legível
   \pause \item Padronização de estruturas
-  \pause \item Melhor aprendizado e manutenção do código
+  \pause \item Melhor aprendizado de outros desenvolvedores
+  \pause \item Melhor manutenção do código
   \pause \item Extensibilidade
   \pause \item Distributividade na comunidade do software livre
 \end{itemize}
@@ -106,17 +125,16 @@
 \subsection{Primeiro Padrão}
 
 \begin{frame}{Primeiro Padrão}
-  \begin{center}
-    \includegraphics[height=0.8\textheight]{./img/hack-core.jpg}
-  \end{center}
+\begin{center}
+  \includegraphics[height=0.8\textheight]{./img/hack-core.jpg}
+\end{center}
 \end{frame}
 
 \subsection{Arquivos}
 
 \begin{frame}{Arquivos}
 \begin{itemize}
-  \pause \item Nomear o diretório
-  \pause \item Ser coerente com nomes de arquivos
+  \pause \item Nomear o diretório e os arquivos coerentemente
   \pause \item Incluir somente arquivos necessários e sob demanda no código
   \pause \item Permitir que o diretório do plugin mude usando funções como:
   \begin{itemize}
@@ -125,6 +143,14 @@
     \pause \item \texttt{plugin\_dir\_path}
   \end{itemize}
 \end{itemize}
+\end{frame}
+
+\begin{frame}{Nomeação}
+  \pause \lstinputlisting{./code/standards-naming.php}
+\end{frame}
+
+\begin{frame}{Inclusão Condicional}
+  \pause \lstinputlisting{./code/standards-including.php}
 \end{frame}
 
 \subsection{Padrões de Código}
@@ -168,7 +194,13 @@
 \end{frame}
 
 \begin{frame}{Vetores}
-  \lstinputlisting{./code/standards-arrays.php}
+  Errado
+  \lstinputlisting{./code/standards-arrays-wrong.php}
+\end{frame}
+
+\begin{frame}{Vetores}
+  Certo
+  \lstinputlisting{./code/standards-arrays-right.php}
 \end{frame}
 
 \subsection{Padrões de SQL}
@@ -176,6 +208,7 @@
 \begin{frame}{Padrões de SQL}
 \begin{itemize}
   \pause \item Evitar escrever consultas
+  \pause \item Escrever as palavras SQL em caixa alta
   \pause \item Validar os tipos de dados antes de utilizá-los
   \pause \item Selecionar só o que for necessário
   \pause \item Utilizar a \texttt{wpdb}
@@ -198,9 +231,9 @@
 \begin{frame}\end{frame}
 
 \begin{frame}{Debug}
-  \begin{center}
-    \includegraphics[height=0.8\textheight]{./img/debug.jpg}
-  \end{center}
+\begin{center}
+  \includegraphics[height=0.8\textheight]{./img/debug.jpg}
+\end{center}
 \end{frame}
 
 \begin{frame}{Constantes de debug no \texttt{wp-config.php}}
@@ -228,7 +261,7 @@
 
 \begin{frame}{Vantagens da Orientação a Objetos em Plugins}
 \begin{itemize}
-  \pause \item Organiza o código, suas funções e métodos
+  \pause \item Organiza o código
   \pause \item Melhora a extensibilidade
   \pause \item Reduz o impacto no escopo global do PHP
   \pause \item Ajuda a não introduzir variáveis globais
@@ -260,7 +293,8 @@
   \pause \item Não deve deixar nenhum dado residual no WordPress
   \pause \item Remove opções do usuário
   \pause \item Remove tabelas
-  \pause \item Avisa o usuário sobre a remoção de dados
+  \pause \item Avisa o usuário antes de remover qualquer
+    dado (\texttt{admin\_notices})
 \end{itemize}
 \end{frame}
 
@@ -328,7 +362,16 @@ Usar sempre a \texttt{wpdb}:
 
 \subsection{Scripts e Estilos}
 
-\begin{frame}\end{frame}
+\begin{frame}{Adicionando scripts}
+  \pause Errado \\
+  \pause No tema:
+  \lstinputlisting{./code/scripts-enqueue-wrong-head.php}
+\end{frame}
+
+\begin{frame}{Adicionando scripts}
+  \pause Errado
+  \pause \lstinputlisting{./code/scripts-enqueue-wrong-head-hook.php}
+\end{frame}
 
 \begin{frame}{Enfileiradores de scripts}
 \pause Funções:
@@ -348,45 +391,75 @@ Usar sempre a \texttt{wpdb}:
   \pause \lstinputlisting{./code/scripts-enqueue.php}
 \end{frame}
 
-\begin{frame}{Incluindo scripts e variáveis}
+\begin{frame}{Incluindo scripts com variáveis}
   \pause \lstinputlisting{./code/scripts-enqueue-localized.php}
 \end{frame}
 
-\begin{frame}{Incluindo scripts e variáveis}
-  \pause \lstinputlisting{./code/scripts-enqueue-localized-result.txt}
+\begin{frame}{Incluindo scripts com variáveis: resultado}
+  \lstinputlisting{./code/scripts-enqueue-localized-result.txt}
 \end{frame}
 
 \subsection{Ferramentas}
 
 \begin{frame}\end{frame}
 
-\begin{frame}{Não precisa reinventar a roda}
-  \begin{center}
-    \includegraphics[height=0.8\textheight]{./img/rewrite.jpg}
-  \end{center}
-\end{frame}
-
 \begin{frame}{Internacionalização}
 \begin{itemize}
   \pause \item Usar funções \texttt{\_\_()} e \texttt{\_e()}
-  \pause \item Carregar o arquivo MO de idioma
+  \pause \item Carregar o arquivo MO
 \end{itemize}
+\end{frame}
+
+\begin{frame}{Internacionalização}
+  \lstinputlisting{./code/i18n-strings.php}
+\end{frame}
+
+\begin{frame}{Internacionalização}
+  \lstinputlisting{./code/i18n-mofile.php}
+\end{frame}
+
+\begin{frame}{Tratamento de Erros}
+\begin{center}
+  \includegraphics[height=0.8\textheight]{./img/error-handling.jpg}
+\end{center}
 \end{frame}
 
 \begin{frame}{Tratamento de erros}
 \begin{itemize}
-  \pause \item \texttt{WP\_Error}
+  \pause \item Instanciações da \texttt{WP\_Error}
+  \pause \item Verificação com \texttt{is\_wp\_error}
+  \pause \item Utilizar a \texttt{wp\_die} para morrer elegantemente
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Morrer elegantemente}
+\begin{frame}{Tratamento de erros}
+  \lstinputlisting{./code/wperror-function.php}
+\end{frame}
+
+\begin{frame}{Tratamento de erros com objetos}
+  \lstinputlisting{./code/wperror-object.php}
+\end{frame}
+
+\begin{frame}{Adicionando erros com objetos}
+  \lstinputlisting{./code/wperror-add.php}
+\end{frame}
+
+\begin{frame}{Mostrando erros}
+  \lstinputlisting{./code/wperror-dump.php}
+  \pause \lstinputlisting{./code/wperror-dump-hooks.php}
+\end{frame}
+
+\begin{frame}{Classes e Funções Úteis}
+\begin{center}
+  \includegraphics[height=0.8\textheight]{./img/rewrite.jpg}
+\end{center}
+\end{frame}
+
+\begin{frame}{Manipulação de Dados}
 \begin{itemize}
-  \pause \item \texttt{wp\_die}
+  \pause \item \texttt{wp\_parse\_args}
+  \pause \item \texttt{wp\_list\_filter}
 \end{itemize}
-\end{frame}
-
-\begin{frame}{Checar compatibilidade com versão}
-  \pause if (!function\_exists) ..
 \end{frame}
 
 \begin{frame}{Formatação}
@@ -427,6 +500,15 @@ Usar sempre a \texttt{wpdb}:
 \end{itemize}
 \end{frame}
 
+\begin{frame}{Cron}
+\begin{itemize}
+  \pause \item \texttt{wp\_schedule\_event}
+  \pause \item \texttt{wp\_schedule\_single\_event}
+  \pause \item \texttt{wp\_unschedule\_event}
+  \pause \item \texttt{wp\_next\_scheduled}
+\end{itemize}
+\end{frame}
+
 \begin{frame}{Classes Úteis}
 \begin{itemize}
   \pause \item \texttt{SimplePie}
@@ -442,40 +524,41 @@ Usar sempre a \texttt{wpdb}:
 \end{itemize}
 \end{frame}
 
+\subsection{Liberando na Comunidade}
 
+\begin{itemize}
+  \pause \item Requerer hospedagem no repositório SVN oficial
+  \pause \item Escrever a documentação
+  \pause \item Fazer uma imagem de apresentação
+  \pause \item Avaliar requisições e gerenciar traduções
+\end{itemize}
 
+\begin{frame}{\texttt{readme.txt} de um plugin}
+  \lstinputlisting{./code/plugin-readme.txt}
+\end{frame}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+\begin{frame}
+\begin{center}
+  \includegraphics[width=0.95\textwidth]{./img/hyperdb-screen.jpg}
+\end{center}
+\end{frame}
 
 \section{Considerações Finais}
+
+\begin{frame}{Considerações Finais}
+\begin{itemize}
+  \pause \item Interfaces altamente flexíveis
+  \pause \item Conjunto de ferramentas amplo e disponível
+  \pause \item Fácil acesso às informações pelo desenvolvedor
+  \pause \item Não tem desculpa para não codificar com qualidade
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+  \includegraphics[height=0.8\textheight]{./img/thank-you.jpg}
+\end{center}
+\end{frame}
 
 \begin{frame}{Referências}
 \begin{itemize}

@@ -6,7 +6,6 @@ class Some_Plugin {
     }
 
     function hook1 { /* code */ }
-
     function hook2 { /* code */ }
 
 }
