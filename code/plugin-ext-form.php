@@ -1,6 +1,6 @@
 <form>
 <?php foreach ( $field as $f ) : ?>
-    <?php $field = apply_filters( 'display_field', $f ); ?>
+    <?php $f = apply_filters( 'display_field', $f ); ?>
     <?php do_action( 'before_display_field', $field ); ?>
 
     <input
