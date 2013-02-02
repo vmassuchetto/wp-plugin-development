@@ -91,7 +91,6 @@
   \pause \item PHP X WordPress
   \pause \item Cultura de leitura de documentação e inspeção de código
   \pause \item Barreira de idioma
-  \pause \item Entrega de produtos deficitários
 \end{itemize}
 \end{frame}
 
@@ -208,9 +207,9 @@
 \begin{frame}{Padrões de SQL}
 \begin{itemize}
   \pause \item Evitar escrever consultas
+  \pause \item Utilizar filtros para a \texttt{WP\_Query}
   \pause \item Escrever as palavras SQL em caixa alta
   \pause \item Validar os tipos de dados antes de utilizá-los
-  \pause \item Selecionar só o que for necessário
   \pause \item Utilizar a \texttt{wpdb}
   \pause \item Se precisar criar tabelas no banco, use \texttt{\$wpdb->prefix}
 \end{itemize}
@@ -241,6 +240,8 @@
   \item \pause \texttt{WP\_DEBUG}
   \item \pause \texttt{WP\_DEBUG\_LOG}
   \item \pause \texttt{WP\_DEBUG\_DISPLAY}
+  \item \pause \texttt{SCRIPT\_DEBUG}
+  \item \pause \texttt{SAVEQUERIES}
 \end{itemize}
 \end{frame}
 
@@ -315,8 +316,32 @@
   \pause \lstinputlisting{./code/plugin-init-oo-pl.php}
 \end{frame}
 
+\begin{frame}{Consultas}
+Sempre prefira a \texttt{WP\_Query} em loops estruturados:
+\begin{itemize}
+  \pause \item \texttt{have\_posts}
+  \pause \item \texttt{the\_post}
+  \pause \item \texttt{next\_post}
+  \pause \item \texttt{rewrind\_posts}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Consultas}
+  Nunca fuja do loop:
+  \pause \lstinputlisting{./code/the-loop.php}
+\end{frame}
+
+\begin{frame}{Filtros de Consulta}
+\begin{itemize}
+  \pause \item \texttt{posts\_where}
+  \pause \item \texttt{posts\_join}
+  \pause \item \texttt{posts\_orderby}
+  \pause \item \texttt{posts\_groupby}
+\end{itemize}
+\end{frame}
+
 \begin{frame}{Banco de dados}
-Usar sempre a \texttt{wpdb}:
+Em último caso, use a \texttt{wpdb}:
 \begin{itemize}
   \pause \item \texttt{query}
   \pause \item \texttt{prepare}
@@ -438,15 +463,6 @@ Usar sempre a \texttt{wpdb}:
 
 \begin{frame}{Tratamento de erros com objetos}
   \lstinputlisting{./code/wperror-object.php}
-\end{frame}
-
-\begin{frame}{Adicionando erros com objetos}
-  \lstinputlisting{./code/wperror-add.php}
-\end{frame}
-
-\begin{frame}{Mostrando erros}
-  \lstinputlisting{./code/wperror-dump.php}
-  \pause \lstinputlisting{./code/wperror-dump-hooks.php}
 \end{frame}
 
 \begin{frame}{Classes e Funções Úteis}
